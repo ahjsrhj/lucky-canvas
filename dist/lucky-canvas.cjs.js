@@ -1205,6 +1205,7 @@ var LuckyWheel = /** @class */ (function (_super) {
     return LuckyWheel;
 }(Lucky));
 
+/** @format */
 var LuckyGrid = /** @class */ (function (_super) {
     __extends(LuckyGrid, _super);
     /**
@@ -1221,6 +1222,7 @@ var LuckyGrid = /** @class */ (function (_super) {
         _this.prizes = [];
         _this.defaultConfig = {};
         _this._defaultConfig = {
+            // 此处初始化无用, 是为了方便类型推导才加的
             gutter: 5,
             speed: 20,
             accelerationTime: 2500,
@@ -1228,26 +1230,28 @@ var LuckyGrid = /** @class */ (function (_super) {
         };
         _this.defaultStyle = {};
         _this._defaultStyle = {
+            // 此处初始化无用, 是为了方便类型推导才加的
             borderRadius: 20,
-            fontColor: '#000',
-            fontSize: '18px',
-            fontStyle: 'microsoft yahei ui,microsoft yahei,simsun,sans-serif',
-            fontWeight: '400',
-            lineHeight: '',
-            background: '#fff',
-            shadow: '',
+            fontColor: "#000",
+            fontSize: "18px",
+            fontStyle: "microsoft yahei ui,microsoft yahei,simsun,sans-serif",
+            fontWeight: "400",
+            lineHeight: "",
+            background: "#fff",
+            shadow: "",
             wordWrap: true,
-            lengthLimit: '90%',
+            lengthLimit: "90%",
         };
         _this.activeStyle = {};
         _this._activeStyle = {
-            background: '#ffce98',
-            shadow: '',
-            fontStyle: '',
-            fontWeight: '',
-            fontSize: '',
-            lineHeight: '',
-            fontColor: '',
+            // 此处初始化无用, 是为了方便类型推导才加的
+            background: "#ffce98",
+            shadow: "",
+            fontStyle: "",
+            fontWeight: "",
+            fontSize: "",
+            lineHeight: "",
+            fontColor: "",
         };
         _this.cellWidth = 0; // 格子宽度
         _this.cellHeight = 0; // 格子高度
@@ -1279,16 +1283,16 @@ var LuckyGrid = /** @class */ (function (_super) {
      * @param data
      */
     LuckyGrid.prototype.initData = function (data) {
-        this.$set(this, 'rows', Number(data.rows) || 3);
-        this.$set(this, 'cols', Number(data.cols) || 3);
-        this.$set(this, 'blocks', data.blocks || []);
-        this.$set(this, 'prizes', data.prizes || []);
-        this.$set(this, 'button', data.button);
-        this.$set(this, 'defaultConfig', data.defaultConfig || {});
-        this.$set(this, 'defaultStyle', data.defaultStyle || {});
-        this.$set(this, 'activeStyle', data.activeStyle || {});
-        this.$set(this, 'startCallback', data.start);
-        this.$set(this, 'endCallback', data.end);
+        this.$set(this, "rows", Number(data.rows) || 3);
+        this.$set(this, "cols", Number(data.cols) || 3);
+        this.$set(this, "blocks", data.blocks || []);
+        this.$set(this, "prizes", data.prizes || []);
+        this.$set(this, "button", data.button);
+        this.$set(this, "defaultConfig", data.defaultConfig || {});
+        this.$set(this, "defaultStyle", data.defaultStyle || {});
+        this.$set(this, "activeStyle", data.activeStyle || {});
+        this.$set(this, "startCallback", data.start);
+        this.$set(this, "endCallback", data.end);
     };
     /**
      * 初始化属性计算
@@ -1296,19 +1300,19 @@ var LuckyGrid = /** @class */ (function (_super) {
     LuckyGrid.prototype.initComputed = function () {
         var _this = this;
         // 默认配置
-        this.$computed(this, '_defaultConfig', function () {
+        this.$computed(this, "_defaultConfig", function () {
             var config = __assign({ gutter: 5, speed: 20, accelerationTime: 2500, decelerationTime: 2500 }, _this.defaultConfig);
             config.gutter = _this.getLength(config.gutter);
             config.speed = config.speed / 40;
             return config;
         });
         // 默认样式
-        this.$computed(this, '_defaultStyle', function () {
-            return __assign({ borderRadius: 20, fontColor: '#000', fontSize: '18px', fontStyle: 'microsoft yahei ui,microsoft yahei,simsun,sans-serif', fontWeight: '400', background: '#fff', shadow: '', wordWrap: true, lengthLimit: '90%' }, _this.defaultStyle);
+        this.$computed(this, "_defaultStyle", function () {
+            return __assign({ borderRadius: 20, fontColor: "#000", fontSize: "18px", fontStyle: "microsoft yahei ui,microsoft yahei,simsun,sans-serif", fontWeight: "400", background: "#fff", shadow: "", wordWrap: true, lengthLimit: "90%" }, _this.defaultStyle);
         });
         // 中奖样式
-        this.$computed(this, '_activeStyle', function () {
-            return __assign({ background: '#ffce98', shadow: '' }, _this.activeStyle);
+        this.$computed(this, "_activeStyle", function () {
+            return __assign({ background: "#ffce98", shadow: "" }, _this.activeStyle);
         });
     };
     /**
@@ -1317,7 +1321,7 @@ var LuckyGrid = /** @class */ (function (_super) {
     LuckyGrid.prototype.initWatch = function () {
         var _this = this;
         // 监听奖品数据的变化
-        this.$watch('prizes', function (newData, oldData) {
+        this.$watch("prizes", function (newData, oldData) {
             var willUpdate = [];
             // 首次渲染时oldData为undefined
             if (!oldData)
@@ -1334,7 +1338,7 @@ var LuckyGrid = /** @class */ (function (_super) {
                     else if (newPrize.imgs)
                         newPrize.imgs.forEach(function (newImg, imgIndex) {
                             if (!oldPrize.imgs)
-                                return prizeImgs[imgIndex] = newImg;
+                                return (prizeImgs[imgIndex] = newImg);
                             var oldImg = oldPrize.imgs[imgIndex];
                             // 如果旧值不存在
                             if (!oldImg)
@@ -1351,7 +1355,7 @@ var LuckyGrid = /** @class */ (function (_super) {
             return _this.init(willUpdate);
         });
         // 监听按钮数据的变化
-        this.$watch('button', function (newData, oldData) {
+        this.$watch("button", function (newData, oldData) {
             var willUpdate = [], btnIndex = _this.cols * _this.rows - 1;
             // 首次渲染时, oldData不存在
             if (!oldData || !oldData.imgs)
@@ -1361,7 +1365,7 @@ var LuckyGrid = /** @class */ (function (_super) {
                 var btnImg_1 = [];
                 newData.imgs.forEach(function (newImg, imgIndex) {
                     if (!oldData.imgs)
-                        return btnImg_1[imgIndex] = newImg;
+                        return (btnImg_1[imgIndex] = newImg);
                     var oldImg = oldData.imgs[imgIndex];
                     // 如果旧值不存在
                     if (!oldImg)
@@ -1401,7 +1405,7 @@ var LuckyGrid = /** @class */ (function (_super) {
                         button.x,
                         button.y,
                         button.col || 1,
-                        button.row || 1
+                        button.row || 1,
                     ]), x = _b[0], y = _b[1], width = _b[2], height = _b[3];
                     ctx.beginPath();
                     ctx.rect(x, y, width, height);
@@ -1414,7 +1418,7 @@ var LuckyGrid = /** @class */ (function (_super) {
         };
         // 同步加载图片
         var num = 0, sum = 0;
-        if (isExpectType(willUpdateImgs, 'array')) {
+        if (isExpectType(willUpdateImgs, "array")) {
             this.draw(); // 先画一次防止闪烁, 因为加载图片是异步的
             willUpdateImgs.forEach(function (imgs, cellIndex) {
                 if (!imgs)
@@ -1460,10 +1464,10 @@ var LuckyGrid = /** @class */ (function (_super) {
                         // 加载 defaultImg 默认图片
                         _a[_b] = (_c.defaultImg = (_d.sent()),
                             _c);
-                        if (!imgInfo.hasOwnProperty('activeSrc')) return [3 /*break*/, 3];
+                        if (!imgInfo.hasOwnProperty("activeSrc")) return [3 /*break*/, 3];
                         return [4 /*yield*/, this.loadImg(imgInfo.activeSrc, imgInfo)];
                     case 2:
-                        activeImg = _d.sent();
+                        activeImg = (_d.sent());
                         this.cellImgs[prizeIndex][imgIndex].activeImg = activeImg;
                         _d.label = 3;
                     case 3:
@@ -1499,10 +1503,7 @@ var LuckyGrid = /** @class */ (function (_super) {
             return [imgObj.width * (trueHeight / imgObj.height), trueHeight];
         }
         // 如果宽度和高度都填写了, 就分别计算
-        return [
-            this.getWidth(imgInfo.width, cell.col),
-            this.getHeight(imgInfo.height, cell.row)
-        ];
+        return [this.getWidth(imgInfo.width, cell.col), this.getHeight(imgInfo.height, cell.row)];
     };
     /**
      * 绘制九宫格抽奖
@@ -1534,7 +1535,7 @@ var LuckyGrid = /** @class */ (function (_super) {
                 x: x + paddingLeft,
                 y: y + paddingTop,
                 w: w - paddingLeft - paddingRight,
-                h: h - paddingTop - paddingBottom
+                h: h - paddingTop - paddingBottom,
             };
         }, { x: 0, y: 0, w: config.width, h: config.height });
         // 计算单一奖品格子的宽度和高度
@@ -1545,10 +1546,11 @@ var LuckyGrid = /** @class */ (function (_super) {
             var _a = _this.getGeometricProperty([prize.x, prize.y, prize.col, prize.row]), x = _a[0], y = _a[1], width = _a[2], height = _a[3];
             var isActive = cellIndex === _this.currIndex % _this.prizes.length >> 0;
             // 处理阴影 (暂时先用any, 这里后续要优化)
-            var shadow = (isActive ? _activeStyle.shadow : (prize.shadow || _defaultStyle.shadow))
-                .replace(/px/g, '') // 清空px字符串
-                .split(',')[0].split(' ') // 防止有人声明多个阴影, 截取第一个阴影
-                .map(function (n, i) { return i < 3 ? Number(n) : n; }); // 把数组的前三个值*像素比
+            var shadow = (isActive ? _activeStyle.shadow : prize.shadow || _defaultStyle.shadow)
+                .replace(/px/g, "") // 清空px字符串
+                .split(",")[0]
+                .split(" ") // 防止有人声明多个阴影, 截取第一个阴影
+                .map(function (n, i) { return (i < 3 ? Number(n) : n); }); // 把数组的前三个值*像素比
             // 绘制阴影
             if (shadow.length === 4) {
                 ctx.shadowColor = shadow[3];
@@ -1556,82 +1558,81 @@ var LuckyGrid = /** @class */ (function (_super) {
                 ctx.shadowOffsetY = shadow[1] * config.dpr;
                 ctx.shadowBlur = shadow[2];
                 // 修正(格子+阴影)的位置, 这里使用逗号运算符
-                shadow[0] > 0 ? (width -= shadow[0]) : (width += shadow[0], x -= shadow[0]);
-                shadow[1] > 0 ? (height -= shadow[1]) : (height += shadow[1], y -= shadow[1]);
+                shadow[0] > 0 ? (width -= shadow[0]) : ((width += shadow[0]), (x -= shadow[0]));
+                shadow[1] > 0 ? (height -= shadow[1]) : ((height += shadow[1]), (y -= shadow[1]));
             }
             drawRoundRect(ctx, x, y, width, height, _this.getLength(prize.borderRadius ? prize.borderRadius : _defaultStyle.borderRadius), _this.handleBackground(x, y, width, height, prize.background, isActive));
             // 清空阴影
-            ctx.shadowColor = 'rgba(0, 0, 0, 0)';
+            ctx.shadowColor = "rgba(0, 0, 0, 0)";
             ctx.shadowOffsetX = 0;
             ctx.shadowOffsetY = 0;
             ctx.shadowBlur = 0;
             // 绘制图片
-            prize.imgs && prize.imgs.forEach(function (imgInfo, imgIndex) {
-                if (!_this.cellImgs[cellIndex])
-                    return false;
-                var cellImg = _this.cellImgs[cellIndex][imgIndex];
-                if (!cellImg)
-                    return false;
-                var renderImg = (isActive && cellImg.activeImg) || cellImg.defaultImg;
-                var _a = _this.computedWidthAndHeight(renderImg, imgInfo, prize), trueWidth = _a[0], trueHeight = _a[1];
-                var _b = [x + _this.getOffsetX(trueWidth, prize.col), y + _this.getHeight(imgInfo.top, prize.row)], imgX = _b[0], imgY = _b[1];
-                var drawImg;
-                if (_this.config.flag === 'WEB') {
-                    // 浏览器中直接绘制标签即可
-                    drawImg = renderImg;
-                }
-                else if (['MINI-WX', 'UNI-H5', 'UNI-MINI-WX'].includes(_this.config.flag)) {
-                    // 小程序中直接绘制一个路径
-                    drawImg = renderImg.path;
-                }
-                ctx.drawImage(drawImg, imgX, imgY, trueWidth, trueHeight);
-            });
-            // 绘制文字
-            prize.fonts && prize.fonts.forEach(function (font) {
-                // 字体样式
-                var style = isActive && _activeStyle.fontStyle
-                    ? _activeStyle.fontStyle
-                    : (font.fontStyle || _defaultStyle.fontStyle);
-                // 字体加粗
-                var fontWeight = isActive && _activeStyle.fontWeight
-                    ? _activeStyle.fontWeight
-                    : (font.fontWeight || _defaultStyle.fontWeight);
-                // 字体大小
-                var size = isActive && _activeStyle.fontSize
-                    ? _this.getLength(_activeStyle.fontSize)
-                    : _this.getLength(font.fontSize || _defaultStyle.fontSize);
-                // 字体行高
-                var lineHeight = isActive && _activeStyle.lineHeight
-                    ? _activeStyle.lineHeight
-                    : font.lineHeight || _defaultStyle.lineHeight || font.fontSize || _defaultStyle.fontSize;
-                ctx.font = fontWeight + " " + size + "px " + style;
-                ctx.fillStyle = (isActive && _activeStyle.fontColor) ? _activeStyle.fontColor : (font.fontColor || _defaultStyle.fontColor);
-                var lines = [], text = String(font.text);
-                // 计算文字换行
-                if (font.hasOwnProperty('wordWrap') ? font.wordWrap : _defaultStyle.wordWrap) {
-                    text = removeEnter(text);
-                    var str = '';
-                    for (var i = 0; i < text.length; i++) {
-                        str += text[i];
-                        var currWidth = ctx.measureText(str).width;
-                        var maxWidth = _this.getWidth(font.lengthLimit || _defaultStyle.lengthLimit, prize.col);
-                        if (currWidth > maxWidth) {
-                            lines.push(str.slice(0, -1));
-                            str = text[i];
-                        }
+            prize.imgs &&
+                prize.imgs.forEach(function (imgInfo, imgIndex) {
+                    if (!_this.cellImgs[cellIndex])
+                        return false;
+                    var cellImg = _this.cellImgs[cellIndex][imgIndex];
+                    if (!cellImg)
+                        return false;
+                    var renderImg = (isActive && cellImg.activeImg) || cellImg.defaultImg;
+                    var _a = _this.computedWidthAndHeight(renderImg, imgInfo, prize), trueWidth = _a[0], trueHeight = _a[1];
+                    var _b = [x + _this.getOffsetX(trueWidth, prize.col), y + _this.getHeight(imgInfo.top, prize.row)], imgX = _b[0], imgY = _b[1];
+                    var drawImg;
+                    if (_this.config.flag === "WEB") {
+                        // 浏览器中直接绘制标签即可
+                        drawImg = renderImg;
                     }
-                    if (str)
-                        lines.push(str);
-                    if (!lines.length)
-                        lines.push(text);
-                }
-                else {
-                    lines = text.split('\n');
-                }
-                lines.forEach(function (line, lineIndex) {
-                    ctx.fillText(line, x + _this.getOffsetX(ctx.measureText(line).width, prize.col), y + _this.getHeight(font.top, prize.row) + (lineIndex + 1) * _this.getLength(lineHeight));
+                    else if (["MINI-WX", "UNI-H5", "UNI-MINI-WX"].includes(_this.config.flag)) {
+                        // 小程序中直接绘制一个路径
+                        drawImg = renderImg.path;
+                    }
+                    ctx.drawImage(drawImg, imgX, imgY, trueWidth, trueHeight);
                 });
-            });
+            // 绘制文字
+            prize.fonts &&
+                prize.fonts.forEach(function (font) {
+                    // 字体样式
+                    var style = isActive && _activeStyle.fontStyle ? _activeStyle.fontStyle : font.fontStyle || _defaultStyle.fontStyle;
+                    // 字体加粗
+                    var fontWeight = isActive && _activeStyle.fontWeight ? _activeStyle.fontWeight : font.fontWeight || _defaultStyle.fontWeight;
+                    // 字体大小
+                    var size = isActive && _activeStyle.fontSize
+                        ? _this.getLength(_activeStyle.fontSize)
+                        : _this.getLength(font.fontSize || _defaultStyle.fontSize);
+                    // 字体行高
+                    var lineHeight = isActive && _activeStyle.lineHeight
+                        ? _activeStyle.lineHeight
+                        : font.lineHeight || _defaultStyle.lineHeight || font.fontSize || _defaultStyle.fontSize;
+                    ctx.font = fontWeight + " " + size + "px " + style;
+                    ctx.fillStyle =
+                        isActive && _activeStyle.fontColor ? _activeStyle.fontColor : font.fontColor || _defaultStyle.fontColor;
+                    var lines = [], text = String(font.text);
+                    // 计算文字换行
+                    if (font.hasOwnProperty("wordWrap") ? font.wordWrap : _defaultStyle.wordWrap) {
+                        text = removeEnter(text);
+                        var str = "";
+                        for (var i = 0; i < text.length; i++) {
+                            str += text[i];
+                            var currWidth = ctx.measureText(str).width;
+                            var maxWidth = _this.getWidth(font.lengthLimit || _defaultStyle.lengthLimit, prize.col);
+                            if (currWidth > maxWidth) {
+                                lines.push(str.slice(0, -1));
+                                str = text[i];
+                            }
+                        }
+                        if (str)
+                            lines.push(str);
+                        if (!lines.length)
+                            lines.push(text);
+                    }
+                    else {
+                        lines = text.split("\n");
+                    }
+                    lines.forEach(function (line, lineIndex) {
+                        ctx.fillText(line, x + _this.getOffsetX(ctx.measureText(line).width, prize.col), y + _this.getHeight(font.top, prize.row) + (lineIndex + 1) * _this.getLength(lineHeight));
+                    });
+                });
         });
         // 触发绘制后回调
         (_b = config.afterDraw) === null || _b === void 0 ? void 0 : _b.call(this, ctx);
@@ -1648,9 +1649,9 @@ var LuckyGrid = /** @class */ (function (_super) {
     LuckyGrid.prototype.handleBackground = function (x, y, width, height, background, isActive) {
         if (isActive === void 0) { isActive = false; }
         var _a = this, ctx = _a.ctx, _defaultStyle = _a._defaultStyle, _activeStyle = _a._activeStyle;
-        background = isActive ? _activeStyle.background : (background || _defaultStyle.background);
+        background = isActive ? _activeStyle.background : background || _defaultStyle.background;
         // 处理线性渐变
-        if (background.includes('linear-gradient')) {
+        if (background.includes("linear-gradient")) {
             background = getLinearGradient(ctx, x, y, width, height, background);
         }
         return background;
@@ -1702,7 +1703,8 @@ var LuckyGrid = /** @class */ (function (_super) {
             }
             return this.slowDown();
         }
-        this.currIndex = (currIndex + quad.easeIn(interval, 0.1, _defaultConfig.speed, _defaultConfig.accelerationTime)) % prizes.length;
+        this.currIndex =
+            (currIndex + quad.easeIn(interval, 0.1, _defaultConfig.speed, _defaultConfig.accelerationTime)) % prizes.length;
         this.draw();
         rAF(this.run.bind(this, num + 1));
     };
@@ -1713,7 +1715,9 @@ var LuckyGrid = /** @class */ (function (_super) {
         var _a;
         var _b = this, rAF = _b.rAF, prizes = _b.prizes, prizeFlag = _b.prizeFlag, stopIndex = _b.stopIndex, endIndex = _b.endIndex, _defaultConfig = _b._defaultConfig;
         var interval = Date.now() - this.endTime;
+        console.log("slowDown:", "prizeFlag:" + prizeFlag + ", stopIndex:" + stopIndex + ", endIndex:" + endIndex + ", currIndex:" + this.currIndex);
         if (interval > _defaultConfig.decelerationTime) {
+            console.log("stop:", "currIndex:" + this.currIndex + ", prizeFlag:" + prizeFlag);
             this.startTime = 0;
             (_a = this.endCallback) === null || _a === void 0 ? void 0 : _a.call(this, __assign({}, prizes.find(function (prize, index) { return index === prizeFlag; })));
             return;
@@ -1743,10 +1747,7 @@ var LuckyGrid = /** @class */ (function (_super) {
         var x = _a[0], y = _a[1], col = _a[2], row = _a[3];
         var _b = this, cellWidth = _b.cellWidth, cellHeight = _b.cellHeight;
         var gutter = this._defaultConfig.gutter;
-        var res = [
-            this.prizeArea.x + (cellWidth + gutter) * x,
-            this.prizeArea.y + (cellHeight + gutter) * y
-        ];
+        var res = [this.prizeArea.x + (cellWidth + gutter) * x, this.prizeArea.y + (cellHeight + gutter) * y];
         col && row && res.push(cellWidth * col + gutter * (col - 1), cellHeight * row + gutter * (row - 1));
         return res;
     };
@@ -1758,9 +1759,9 @@ var LuckyGrid = /** @class */ (function (_super) {
      */
     LuckyGrid.prototype.getWidth = function (width, col) {
         if (col === void 0) { col = 1; }
-        if (isExpectType(width, 'number'))
+        if (isExpectType(width, "number"))
             return width;
-        if (isExpectType(width, 'string'))
+        if (isExpectType(width, "string"))
             return this.changeUnits(width, this.cellWidth * col + this._defaultConfig.gutter * (col - 1));
         return 0;
     };
@@ -1772,9 +1773,9 @@ var LuckyGrid = /** @class */ (function (_super) {
      */
     LuckyGrid.prototype.getHeight = function (height, row) {
         if (row === void 0) { row = 1; }
-        if (isExpectType(height, 'number'))
+        if (isExpectType(height, "number"))
             return height;
-        if (isExpectType(height, 'string'))
+        if (isExpectType(height, "string"))
             return this.changeUnits(height, this.cellHeight * row + this._defaultConfig.gutter * (row - 1));
         return 0;
     };
