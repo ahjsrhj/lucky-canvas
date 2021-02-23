@@ -549,12 +549,20 @@ export default class LuckyGrid extends Lucky {
   private slowDown(): void {
     const { rAF, prizes, prizeFlag, stopIndex, endIndex, _defaultConfig } = this;
     let interval = Date.now() - this.endTime;
-    console.log(
-      "slowDown:",
-      `prizeFlag:${prizeFlag}, stopIndex:${stopIndex}, endIndex:${endIndex}, currIndex:${this.currIndex}`
-    );
+    // console.log(
+    //   "slowDown:",
+    //   `prizeFlag:${prizeFlag}, stopIndex:${stopIndex}, endIndex:${endIndex}, currIndex:${this.currIndex}`
+    // );
     if (interval > _defaultConfig.decelerationTime) {
-      console.log("stop:", `currIndex:${this.currIndex}, prizeFlag:${prizeFlag}`);
+      const currIndex = this.currIndex;
+      if (prizeFlag != null && prizeFlag !== currIndex >> 0) {
+        // 最后一次绘制
+        this.currIndex = prizeFlag;
+        this.draw();
+        rAF(this.slowDown.bind(this));
+        return;
+      }
+      // console.log("stop:", `currIndex:${this.currIndex}, prizeFlag:${prizeFlag}`);
       this.startTime = 0;
       this.endCallback?.({ ...prizes.find((prize, index) => index === prizeFlag) });
       return;
