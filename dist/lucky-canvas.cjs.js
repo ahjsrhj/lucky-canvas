@@ -1715,9 +1715,20 @@ var LuckyGrid = /** @class */ (function (_super) {
         var _a;
         var _b = this, rAF = _b.rAF, prizes = _b.prizes, prizeFlag = _b.prizeFlag, stopIndex = _b.stopIndex, endIndex = _b.endIndex, _defaultConfig = _b._defaultConfig;
         var interval = Date.now() - this.endTime;
-        console.log("slowDown:", "prizeFlag:" + prizeFlag + ", stopIndex:" + stopIndex + ", endIndex:" + endIndex + ", currIndex:" + this.currIndex);
+        // console.log(
+        //   "slowDown:",
+        //   `prizeFlag:${prizeFlag}, stopIndex:${stopIndex}, endIndex:${endIndex}, currIndex:${this.currIndex}`
+        // );
         if (interval > _defaultConfig.decelerationTime) {
-            console.log("stop:", "currIndex:" + this.currIndex + ", prizeFlag:" + prizeFlag);
+            var currIndex = this.currIndex;
+            if (prizeFlag != null && prizeFlag !== currIndex >> 0) {
+                // 最后一次绘制
+                this.currIndex = prizeFlag;
+                this.draw();
+                rAF(this.slowDown.bind(this));
+                return;
+            }
+            // console.log("stop:", `currIndex:${this.currIndex}, prizeFlag:${prizeFlag}`);
             this.startTime = 0;
             (_a = this.endCallback) === null || _a === void 0 ? void 0 : _a.call(this, __assign({}, prizes.find(function (prize, index) { return index === prizeFlag; })));
             return;
